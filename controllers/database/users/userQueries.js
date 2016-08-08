@@ -19,6 +19,9 @@ module.exports = {
         e2e_username: newUserInfo.e2e_username
     })
   },
+  findUberUser: (uuid) => {
+    return db.knex('e2e_users').where('uber_uuid', uuid)
+  },
   userLoginCheck: (user) => {
     return db.knex('e2e_users').where(user)
   },

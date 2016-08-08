@@ -12,37 +12,54 @@ var e2eUserTable = ModelBase.extend({
 passport.use(new uberStrategy({
     clientID: process.env.uber_api_client_id,
     clientSecret: process.env.uber_api_client_secret,
-    callbackURL: "https://e2etravel.herokuapp.com/auth/uber/callback",
-    // callbackURL: "http://localhost:3000/auth/uber/callback",
+    // callbackURL: "https://e2etravel.herokuapp.com/auth/uber/callback",
+    callbackURL: "http://localhost:3000/auth/uber/callback",
     state: true
   },
   (accessToken, refreshToken, profile, done) => {
-    e2eUserTable.findOrCreateByProperty({
-      e2e_uber_picture_url: profile.picture,
-      e2e_firstname: profile.first_name,
-      e2e_lastname: profile.last_name,
-      uber_uuid: profile.uuid,
-      uber_rider_id: profile.rider_id,
-      uber_key: accessToken,
-      uber_access_token: accessToken,
-      uber_refresh_token: refreshToken,
-      e2e_email: profile.email
-    }, {
-      uber_uuid: profile.uuid
-    }).then((response) => {
-      console.log(response);
-      e2eUserTable.update({
-        uber_key: accessToken
-      }, {
-        id: response.id
-      });
-      profile.id = response.id
-      profile.username = response.attributes.e2e_username;
-      profile.firstname = response.attributes.e2e_firstname;
-      profile.lastname = response.attributes.e2e_lastname;
-      profile.username = response.attributes.e2e_username;
-      profile.email = response.attributes.e2e_email;
-      return done(null, profile)
+
+    // e2eUserTable.findOrCreateByProperty({
+    //   e2e_uber_picture_url: profile.picture,
+    //   e2e_firstname: profile.first_name,
+    //   e2e_lastname: profile.last_name,
+    //   uber_uuid: profile.uuid,
+    //   uber_rider_id: profile.rider_id,
+    //   uber_key: accessToken,
+    //   uber_access_token: accessToken,
+    //   uber_refresh_token: refreshToken,
+    //   e2e_email: profile.email
+    // }, {
+    //   uber_uuid: profile.uuid
+    // })
+    userQueries.findUberUser(profile.uuid).then((userRows) => {
+      console.log(userRows);
+      if(userRows.length === 0){
+        // no user, create
+        userQueries.createUser({
+          e2e_uber_picture_url: profile.picture,
+          e2e_firstname: profile.first_name,
+          e2e_lastname: profile.last_name,
+          uber_uuid: profile.uuid,
+          uber_rider_id: profile.rider_id,
+          uber_key: accessToken,
+          uber_access_token: accessToken,
+          uber_refresh_token: refreshToken,
+          e2e_email: profile.email
+        })
+      }else {
+        e2eUserTable.update({
+          uber_key: accessToken
+        }, {
+          id: userRows[0].id
+        });
+        profile.id = userRows[0].id
+        profile.username = userRows[0].e2e_username;
+        profile.firstname = userRows[0].e2e_firstname;
+        profile.lastname = userRows[0].e2e_lastname;
+        profile.username = userRows[0].e2e_username;
+        profile.email = userRows[0].e2e_email;
+        return done(null, profile)
+      }
     })
   }
 ))
