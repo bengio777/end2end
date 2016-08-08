@@ -33,8 +33,9 @@ router.get('/', (req, res, next) => {
         google_api_count: db_counts.rows[3].count,
         user_location_count: db_counts.rows[2].count,
         user_trips_count: db_counts.rows[1].count
-      }
-    })    
+      },
+      
+    })
   })
 })
 

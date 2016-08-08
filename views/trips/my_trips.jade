@@ -94,7 +94,7 @@ block content
 
 										when '300'
 											.card-header
-												.card-title.deep-purple
+												.card-title.alex-magenta
 													h4.flight-card-title= trip.trip_name
 													p.flight-card-date= trip.created_at
 											.card-content-bg.white-text
@@ -137,7 +137,7 @@ block content
 																	span.grey-text.text-lighten-4 Destination:
 																p.small
 																	span.grey-text.text-lighten-4= trip.destination_formatted_address
-												// begin time chart
+												// begin time chart`
 												.card-content
 													.line-chart-wrapper
 														p.margin.white-text Trip Duration History (with traffic)
@@ -252,8 +252,6 @@ block content
 																	span.grey-text.text-lighten-4= trip.destination_formatted_address
 												// begin time chart
 												.card-content.cyan
-													a.btn-floating.btn-move-up.waves-effect.waves-light.darken-2.right
-														i.mdi-content-add.activator
 													.line-chart-wrapper
 														p.margin.white-text Trip Duration History (with traffic)
 														canvas.maps_time_estimate_line_chart(tripid="#{trip.id}", id="trip-#{trip.id}-time-line-chart", height='114')

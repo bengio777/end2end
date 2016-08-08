@@ -74,25 +74,10 @@ block content
 							.card-content
 								a.btn-floating.btn-move-up.darken-2.right
 									i.mdi-content-add.activator
-								.col.s12.m3.l3
-									#doughnut-chart-wrapper
-										canvas#doughnut-chart(height='200')
-										.doughnut-chart-status
-											| 4500
-											p.ultra-small.center-align Sold
-								.col.s12.m2.l2
-									ul.doughnut-chart-legend
-										li.mobile.ultra-small
-											span.legend-color
-											| Mobile
-										li.kitchen.ultra-small
-											span.legend-color
-											|  Kitchen
-										li.home.ultra-small
-											span.legend-color
-											|  Home
-								.col.s12.m3.l3
-									h3 trip title here
+								.col.s12.m12.l12
+									h3#trip_title
+									h4#trip_orig
+									h4#trip_dest
 							.card-reveal
 								span.card-title.grey-text.text-darken-4
 									| Revenue by Month 
@@ -184,11 +169,9 @@ block content
 							.col.s12.m12.l4
 								ul#projects-collection.collection
 									li.collection-item.avatar
-										i.mdi-file-folder.circle.light-blue.darken-2
+										i.mdi-action-favorite.circle.alex-magenta
 										span.collection-header My Favorite Locations
 										p Add to your favorites list on the locations page!
-										a.secondary-content(href='#')
-											i.mdi-action-grade
 									li.collection-item
 										.row
 											.col.s6

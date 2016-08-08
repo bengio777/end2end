@@ -161,9 +161,15 @@ $(document).ready(() => {
 		method: 'get',
 		url: '/trips/primaryCommute'
 	}).then((primaryCommuteData) => {
+	console.log(primaryCommuteData);
+	$('#trip_title').html(primaryCommuteData['rows'][0].trip_name)
+	$('#trip_orig').html(primaryCommuteData['rows'][0].directions_start_addr)
+	$('#trip_dest').html(primaryCommuteData['rows'][0].directions_end_addr)
+
 		var parsedMapData = parseGMChartData(primaryCommuteData).sort(function(a, b) {
 						return (a.created_at_formatted.date - b.created_at_formatted.date)
 					}).slice(0, 30)
+					console.log
 		var constructedChartData =  {
 			labels : parsedMapData.map((data) => data.created_at_formatted.ampm),
 			datasets : [

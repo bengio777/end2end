@@ -19,6 +19,23 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
+body {
+
+display: -webkit-flex;
+display: flex;
+min-height: 100vh;
+
+-webkit-flex-direction: column;
+flex-direction: column;
+}
+
+#main {
+-webkit-flex: 1 0 auto;
+flex: 1 0 auto;
+}
+
+
+
 .primary-secondary-grad {
   background: #673AB7; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #673AB7 , #00BCD4); /* Chrome 10-25, Safari 5.1-6 */
@@ -48,9 +65,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 /* trip card */
 .origin_name_trip_card {
-  background: #673AB7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #673AB7 , #00BCD4); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #673AB7 , #00BCD4);
+  padding-top:38px;
 }
 
 body {
