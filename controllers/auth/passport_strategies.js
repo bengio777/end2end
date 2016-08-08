@@ -46,25 +46,25 @@ passport.use(new uberStrategy({
     })
   }
 ))
-passport.use(new lyftStrategy({
-    clientID: process.env.lyft_api_client_id,
-    clientSecret: process.env.lyft_api_client_secret,
-    callbackURL: 'http://localhost:3000/lyftAuth',
-    state: true
-  },
-  (accessToken, refreshToken, profile, done) => {
-    console.log('inside lift strategy');
+// passport.use(new lyftStrategy({
+//     clientID: process.env.lyft_api_client_id,
+//     clientSecret: process.env.lyft_api_client_secret,
+//     callbackURL: 'http://localhost:3000/lyftAuth',
+//     state: true
+//   },
+//   (accessToken, refreshToken, profile, done) => {
+//     console.log('inside lift strategy');
 
-    var user = profile;
-    console.log(profile);
-    console.log(accessToken);
-    // console.log(userQueries);
+//     var user = profile;
+//     console.log(profile);
+//     console.log(accessToken);
+//     // console.log(userQueries);
 
 
-    user.accessToken = accessToken;
-    return done(null, user);
-  }
-));
+//     user.accessToken = accessToken;
+//     return done(null, user);
+//   }
+// ));
 passport.use(
   new LocalStrategy({
       usernameField: 'username',
