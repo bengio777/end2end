@@ -1,4 +1,4 @@
-require('dotenv').config({path:'../../.env'})
+// require('dotenv').config({path:'../../.env'})
 var Promise = require('bluebird')
 var Uber = Promise.promisifyAll(require('node-uber'))
 var uber = new Uber({
