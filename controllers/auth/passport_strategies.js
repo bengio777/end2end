@@ -9,16 +9,6 @@ var bcrypt = require('bcrypt')
 var e2eUserTable = ModelBase.extend({
     tableName: 'e2e_users'
 })
-e2eUserTable.findOrCreateByProperty =  function (data, options, attrOjb) {
-      return this.findOne(attrOjb, extend(options, { require: false }))
-      .bind(this)
-      .then(function (model) {
-      var defaults = options && options.defaults
-      return model ?
-        model :
-        this.create(extend(defaults, data), options)
-      })
-    }
 passport.use(new uberStrategy({
     clientID: process.env.uber_api_client_id,
     clientSecret: process.env.uber_api_client_secret,
