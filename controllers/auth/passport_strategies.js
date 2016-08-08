@@ -12,8 +12,8 @@ var e2eUserTable = ModelBase.extend({
 passport.use(new uberStrategy({
     clientID: process.env.uber_api_client_id,
     clientSecret: process.env.uber_api_client_secret,
-    // callbackURL    : "https://e2etravel.herokuapp.com/auth/uber/callback",
-    callbackURL: "http://localhost:3000/auth/uber/callback",
+    callbackURL    : "https://e2etravel.herokuapp.com/auth/uber/callback",
+    // callbackURL: "http://localhost:3000/auth/uber/callback",
     state: true
   },
   (accessToken, refreshToken, profile, done) => {
