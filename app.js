@@ -38,15 +38,33 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/nm', express.static(__dirname + '/node_modules/'));
-app.use('/', routes);
-app.use('/trips', trips);
+
 app.use('/login', login);
+app.use('/', routes);
+
+// route middleware to make sure a user is logged in
+app.use(function isLoggedIn(req, res, next) {
+    console.log(req.session)
+    // if user is authenticated in the session, carry on 
+    if (req.session.passport.user){
+        return next();
+    } else {
+    res.redirect('/login');
+
+    }
+})
+
+
+app.use('/trips', trips);
 app.use('/dashboard', dashboard);
 app.use('/profile', profile);
 app.use('/locations', locations);
 app.use('/logout', logout);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
