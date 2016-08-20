@@ -13,7 +13,7 @@ module.exports = {
   },
   additionalLoginInfo: (uuid, newUserInfo) => {
     return db.knex('e2e_users')
-      .where('uber_uuid', uuid)
+      .where('id', id)
       .update({
         e2e_password: bcrypt.hashSync(newUserInfo.e2e_password, 10),
         e2e_username: newUserInfo.e2e_username

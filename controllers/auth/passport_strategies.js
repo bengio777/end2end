@@ -88,10 +88,13 @@ passport.use(
       passwordField: 'password',
       session: true },
     (username, password, done) => {
+      console.log(username)
+      console.log(password)
         process.nextTick(() => {
           userQueries.userLoginCheck({e2e_username: username})
             .catch((e) => done(null, false))
             .then((collection) => {
+              console.log(collection)
             if(collection.length > 0){
               if(bcrypt.compareSync(password, collection[0].e2e_password)){
                 return done(null,

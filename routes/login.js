@@ -45,11 +45,11 @@ router.route('/register')
 router.route('/completeRegistration')
   .get((req, res, next) => {
     res.render('login/additional_info', {
-      uber_uuid: req.session.passport.user.uuid
+      id: req.session.passport.user.id
     })
   })
   .post((req, res, next) => {
-   userQueries.additionalLoginInfo(req.body.uber_uuid, {
+   userQueries.additionalLoginInfo(req.body.id, {
      e2e_password: req.body.e2e_password,
      e2e_username: req.body.e2e_username
    }).then((resp) => {
