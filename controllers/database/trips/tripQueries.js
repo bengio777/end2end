@@ -2,6 +2,7 @@ var db = require('../../../config/db')
 
 module.exports = {
   createTrip: (trip) => {
+    console.log("now creating trip", trip)
     return db.knex('trip_directions').insert(trip).returning('*')
   },
   getAllTrips: () => {

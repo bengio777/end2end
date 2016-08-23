@@ -43,6 +43,7 @@ router.route('/new')
       })
     })
   .post((req, res, next) => {
+    console.log("req.body here")
     console.log(req.body);
 
     locationIds = {
