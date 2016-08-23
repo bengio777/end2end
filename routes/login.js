@@ -14,14 +14,15 @@ router.route('/')
   .post(passport.authenticate('local', { failureRedirect: '/login'}),
   (req, res, next) => {
     console.log(req.session);
-    console.log('~~~~~~~');
     res.redirect('/dashboard')
 
   })
+  
 // forgot password
 router.get('/forgot_pass', (req, res, next) => {
   res.render('login/forgot_pass')
 })
+
 // register
 router.route('/register')
   .get((req, res, next) => {
@@ -30,13 +31,7 @@ router.route('/register')
   .post((req, res, next) => {
     console.log(req.body);
     
-    userTable.findOrCreateByProperty({
-      e2e_username: req.body.e2e_username,
-      e2e_password: req.body.e2e_password,
-      e2e_email: req.body.e2e_email
-    }, {
-      e2e_username: req.body.e2e_username
-    }).then((resp) => {
+    userQueries.createUserIfNotExists(req.body).then((resp) => {
       res.render('login/index', {message:"Account created. Please login."})
     }).catch((e) => console.log(e))
   })
@@ -55,6 +50,6 @@ router.route('/completeRegistration')
    }).then((resp) => {
       res.redirect('/dashboard')
     })
-
   })
+
 module.exports = router;

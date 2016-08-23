@@ -2,6 +2,19 @@ var db = require('../../../config/db')
 var ModelBase = require('bookshelf-modelbase')(db.bookshelf);
 var bcrypt = require('bcrypt')
 module.exports = {
+  createUserIfNotExists(user) {
+  console.log("now creating user", user)
+    return db.knex('e2e_users').where('e2e_username', user.e2e_username)
+    .then((userResponse) => {
+      if(userResponse.length == 0){
+        return db.knex('e2e_users').insert({
+          e2e_username: user.e2e_username, 
+          e2e_password: bcrypt.hashSync(user.e2e_password, 10), 
+          e2e_email:user.e2e_email
+        })
+      }
+    })
+},
   getUserByUuid : (uuid) => {
     return db.knex('e2e_users').where('uber_uuid', uuid)
   },
